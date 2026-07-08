@@ -1,6 +1,6 @@
 @echo off
 
-set SYSCFG_PATH="D:\TI_SYSCONFIG\sysconfig_cli.bat"
+set SYSCFG_PATH="E:\software\m0_sysconfig\sysconfig_cli.bat"
 
 if not exist "%SYSCFG_PATH%" (
     echo.

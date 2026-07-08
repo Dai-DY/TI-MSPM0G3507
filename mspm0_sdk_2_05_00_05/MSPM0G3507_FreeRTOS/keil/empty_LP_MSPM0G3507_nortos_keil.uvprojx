@@ -10,7 +10,7 @@
       <TargetName>empty_LP_MSPM0G3507_nortos_keil</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6210000::V6.21::ARMCLANG</pCCUsed>
+      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
+              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -461,6 +461,16 @@
               <FileName>board_led.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\USER\Module\Board_Device\board_led.h</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mg310\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mg310\motor.h</FilePath>
             </File>
           </Files>
         </Group>

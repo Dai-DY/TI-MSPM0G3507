@@ -40,7 +40,7 @@
 
 #include "ti_msp_dl_config.h"
 
-DL_TimerA_backupConfig gTIM_delay_usBackup;
+DL_TimerA_backupConfig gPWM_0Backup;
 DL_TimerA_backupConfig gTIM_delay_msBackup;
 
 /*
@@ -53,11 +53,11 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_GPIO_init();
     /* Module-Specific Initializations*/
     SYSCFG_DL_SYSCTL_init();
-    SYSCFG_DL_TIM_delay_us_init();
+    SYSCFG_DL_PWM_0_init();
     SYSCFG_DL_TIM_delay_ms_init();
     SYSCFG_DL_UART_DEBUG_init();
     /* Ensure backup structures have no valid state */
-	gTIM_delay_usBackup.backupRdy 	= false;
+	gPWM_0Backup.backupRdy 	= false;
 	gTIM_delay_msBackup.backupRdy 	= false;
 
 
@@ -70,7 +70,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_saveConfiguration(void)
 {
     bool retStatus = true;
 
-	retStatus &= DL_TimerA_saveConfiguration(TIM_delay_us_INST, &gTIM_delay_usBackup);
+	retStatus &= DL_TimerA_saveConfiguration(PWM_0_INST, &gPWM_0Backup);
 	retStatus &= DL_TimerA_saveConfiguration(TIM_delay_ms_INST, &gTIM_delay_msBackup);
 
     return retStatus;
@@ -81,7 +81,7 @@ SYSCONFIG_WEAK bool SYSCFG_DL_restoreConfiguration(void)
 {
     bool retStatus = true;
 
-	retStatus &= DL_TimerA_restoreConfiguration(TIM_delay_us_INST, &gTIM_delay_usBackup, false);
+	retStatus &= DL_TimerA_restoreConfiguration(PWM_0_INST, &gPWM_0Backup, false);
 	retStatus &= DL_TimerA_restoreConfiguration(TIM_delay_ms_INST, &gTIM_delay_msBackup, false);
 
     return retStatus;
@@ -91,13 +91,13 @@ SYSCONFIG_WEAK void SYSCFG_DL_initPower(void)
 {
     DL_GPIO_reset(GPIOA);
     DL_GPIO_reset(GPIOB);
-    DL_TimerA_reset(TIM_delay_us_INST);
+    DL_TimerA_reset(PWM_0_INST);
     DL_TimerA_reset(TIM_delay_ms_INST);
     DL_UART_Main_reset(UART_DEBUG_INST);
 
     DL_GPIO_enablePower(GPIOA);
     DL_GPIO_enablePower(GPIOB);
-    DL_TimerA_enablePower(TIM_delay_us_INST);
+    DL_TimerA_enablePower(PWM_0_INST);
     DL_TimerA_enablePower(TIM_delay_ms_INST);
     DL_UART_Main_enablePower(UART_DEBUG_INST);
     delay_cycles(POWER_STARTUP_DELAY);
@@ -108,6 +108,11 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initPeripheralAnalogFunction(GPIO_HFXIN_IOMUX);
     DL_GPIO_initPeripheralAnalogFunction(GPIO_HFXOUT_IOMUX);
+
+    DL_GPIO_initPeripheralOutputFunction(GPIO_PWM_0_C0_IOMUX,GPIO_PWM_0_C0_IOMUX_FUNC);
+    DL_GPIO_enableOutput(GPIO_PWM_0_C0_PORT, GPIO_PWM_0_C0_PIN);
+    DL_GPIO_initPeripheralOutputFunction(GPIO_PWM_0_C1_IOMUX,GPIO_PWM_0_C1_IOMUX_FUNC);
+    DL_GPIO_enableOutput(GPIO_PWM_0_C1_PORT, GPIO_PWM_0_C1_PIN);
 
     DL_GPIO_initPeripheralOutputFunction(
         GPIO_UART_DEBUG_IOMUX_TX, GPIO_UART_DEBUG_IOMUX_TX_FUNC);
@@ -122,9 +127,61 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_PULL_DOWN,
 		 DL_GPIO_DRIVE_STRENGTH_LOW, DL_GPIO_HIZ_DISABLE);
 
-    DL_GPIO_clearPins(GPIOB, LED_B22_PIN);
-    DL_GPIO_enableOutput(GPIOB, LED_B22_PIN);
-    DL_GPIO_setUpperPinsPolarity(GPIOB, DL_GPIO_PIN_21_EDGE_RISE);
+    DL_GPIO_initDigitalInputFeatures(CAR_KEY_PIN_KEY_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+
+    DL_GPIO_initDigitalOutput(CAR_LED_PIN_LED_IOMUX);
+
+    DL_GPIO_initDigitalOutput(BIN_BIN1_IOMUX);
+
+    DL_GPIO_initDigitalOutput(BIN_BIN2_IOMUX);
+
+    DL_GPIO_initDigitalOutput(AIN_AIN1_IOMUX);
+
+    DL_GPIO_initDigitalOutput(AIN_AIN2_IOMUX);
+
+    DL_GPIO_initDigitalInputFeatures(ENCODERA_E1A_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+
+    DL_GPIO_initDigitalInputFeatures(ENCODERA_E1B_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+
+    DL_GPIO_initDigitalInputFeatures(ENCODERB_E2A_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+
+    DL_GPIO_initDigitalInputFeatures(ENCODERB_E2B_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_HYSTERESIS_DISABLE, DL_GPIO_WAKEUP_DISABLE);
+
+    DL_GPIO_clearPins(GPIOA, BIN_BIN1_PIN |
+		BIN_BIN2_PIN |
+		AIN_AIN1_PIN |
+		AIN_AIN2_PIN);
+    DL_GPIO_enableOutput(GPIOA, BIN_BIN1_PIN |
+		BIN_BIN2_PIN |
+		AIN_AIN1_PIN |
+		AIN_AIN2_PIN);
+    DL_GPIO_setUpperPinsPolarity(GPIOA, DL_GPIO_PIN_26_EDGE_RISE |
+		DL_GPIO_PIN_25_EDGE_RISE);
+    DL_GPIO_clearInterruptStatus(GPIOA, ENCODERA_E1A_PIN |
+		ENCODERA_E1B_PIN);
+    DL_GPIO_enableInterrupt(GPIOA, ENCODERA_E1A_PIN |
+		ENCODERA_E1B_PIN);
+    DL_GPIO_clearPins(GPIOB, LED_B22_PIN |
+		CAR_LED_PIN_LED_PIN);
+    DL_GPIO_enableOutput(GPIOB, LED_B22_PIN |
+		CAR_LED_PIN_LED_PIN);
+    DL_GPIO_setUpperPinsPolarity(GPIOB, DL_GPIO_PIN_21_EDGE_RISE |
+		DL_GPIO_PIN_24_EDGE_RISE |
+		DL_GPIO_PIN_20_EDGE_RISE);
+    DL_GPIO_clearInterruptStatus(GPIOB, ENCODERB_E2A_PIN |
+		ENCODERB_E2B_PIN);
+    DL_GPIO_enableInterrupt(GPIOB, ENCODERB_E2A_PIN |
+		ENCODERB_E2B_PIN);
 
 }
 
@@ -159,46 +216,65 @@ SYSCONFIG_WEAK void SYSCFG_DL_SYSCTL_init(void)
     DL_SYSCTL_setULPCLKDivider(DL_SYSCTL_ULPCLK_DIV_2);
     DL_SYSCTL_enableMFCLK();
     DL_SYSCTL_setMCLKSource(SYSOSC, HSCLK, DL_SYSCTL_HSCLK_SOURCE_SYSPLL);
+    /* INT_GROUP1 Priority */
+    NVIC_SetPriority(GPIOB_INT_IRQn, 0);
 
 }
 
 
-
 /*
- * Timer clock configuration to be sourced by BUSCLK /  (10000000 Hz)
+ * Timer clock configuration to be sourced by  / 1 (80000000 Hz)
  * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
- *   1000000 Hz = 10000000 Hz / (8 * (9 + 1))
+ *   80000000 Hz = 80000000 Hz / (1 * (0 + 1))
  */
-static const DL_TimerA_ClockConfig gTIM_delay_usClockConfig = {
-    .clockSel    = DL_TIMER_CLOCK_BUSCLK,
-    .divideRatio = DL_TIMER_CLOCK_DIVIDE_8,
-    .prescale    = 9U,
+static const DL_TimerA_ClockConfig gPWM_0ClockConfig = {
+    .clockSel = DL_TIMER_CLOCK_BUSCLK,
+    .divideRatio = DL_TIMER_CLOCK_DIVIDE_1,
+    .prescale = 0U
 };
 
-/*
- * Timer load value (where the counter starts from) is calculated as (timerPeriod * timerClockFreq) - 1
- * TIM_delay_us_INST_LOAD_VALUE = (1us * 1000000 Hz) - 1
- */
-static const DL_TimerA_TimerConfig gTIM_delay_usTimerConfig = {
-    .period     = TIM_delay_us_INST_LOAD_VALUE,
-    .timerMode  = DL_TIMER_TIMER_MODE_ONE_SHOT,
-    .startTimer = DL_TIMER_STOP,
+static const DL_TimerA_PWMConfig gPWM_0Config = {
+    .pwmMode = DL_TIMER_PWM_MODE_EDGE_ALIGN_UP,
+    .period = 8000,
+    .isTimerWithFourCC = false,
+    .startTimer = DL_TIMER_START,
 };
 
-SYSCONFIG_WEAK void SYSCFG_DL_TIM_delay_us_init(void) {
+SYSCONFIG_WEAK void SYSCFG_DL_PWM_0_init(void) {
 
-    DL_TimerA_setClockConfig(TIM_delay_us_INST,
-        (DL_TimerA_ClockConfig *) &gTIM_delay_usClockConfig);
+    DL_TimerA_setClockConfig(
+        PWM_0_INST, (DL_TimerA_ClockConfig *) &gPWM_0ClockConfig);
 
-    DL_TimerA_initTimerMode(TIM_delay_us_INST,
-        (DL_TimerA_TimerConfig *) &gTIM_delay_usTimerConfig);
-    DL_TimerA_enableClock(TIM_delay_us_INST);
+    DL_TimerA_initPWMMode(
+        PWM_0_INST, (DL_TimerA_PWMConfig *) &gPWM_0Config);
+
+    // Set Counter control to the smallest CC index being used
+    DL_TimerA_setCounterControl(PWM_0_INST,DL_TIMER_CZC_CCCTL0_ZCOND,DL_TIMER_CAC_CCCTL0_ACOND,DL_TIMER_CLC_CCCTL0_LCOND);
+
+    DL_TimerA_setCaptureCompareOutCtl(PWM_0_INST, DL_TIMER_CC_OCTL_INIT_VAL_LOW,
+		DL_TIMER_CC_OCTL_INV_OUT_DISABLED, DL_TIMER_CC_OCTL_SRC_FUNCVAL,
+		DL_TIMERA_CAPTURE_COMPARE_0_INDEX);
+
+    DL_TimerA_setCaptCompUpdateMethod(PWM_0_INST, DL_TIMER_CC_UPDATE_METHOD_IMMEDIATE, DL_TIMERA_CAPTURE_COMPARE_0_INDEX);
+    DL_TimerA_setCaptureCompareValue(PWM_0_INST, 0, DL_TIMER_CC_0_INDEX);
+
+    DL_TimerA_setCaptureCompareOutCtl(PWM_0_INST, DL_TIMER_CC_OCTL_INIT_VAL_LOW,
+		DL_TIMER_CC_OCTL_INV_OUT_DISABLED, DL_TIMER_CC_OCTL_SRC_FUNCVAL,
+		DL_TIMERA_CAPTURE_COMPARE_1_INDEX);
+
+    DL_TimerA_setCaptCompUpdateMethod(PWM_0_INST, DL_TIMER_CC_UPDATE_METHOD_IMMEDIATE, DL_TIMERA_CAPTURE_COMPARE_1_INDEX);
+    DL_TimerA_setCaptureCompareValue(PWM_0_INST, 0, DL_TIMER_CC_1_INDEX);
+
+    DL_TimerA_enableClock(PWM_0_INST);
 
 
-
+    
+    DL_TimerA_setCCPDirection(PWM_0_INST , DL_TIMER_CC0_OUTPUT | DL_TIMER_CC1_OUTPUT );
 
 
 }
+
+
 
 /*
  * Timer clock configuration to be sourced by MFCLK /  (500000 Hz)

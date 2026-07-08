@@ -5,6 +5,7 @@
 ".\objects\tim_delay.o"
 ".\objects\uart0_debug.o"
 ".\objects\board_led.o"
+".\objects\motor.o"
 ".\objects\croutine.o"
 ".\objects\event_groups.o"
 ".\objects\list.o"
