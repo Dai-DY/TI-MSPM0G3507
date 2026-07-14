@@ -73,8 +73,6 @@
   ..\..\source\ti\driverlib\dl_vref.h \
   ..\..\source\ti\driverlib\dl_wwdt.h \
   ..\..\source\ti\driverlib\m0p\dl_interrupt.h \
-  ..\..\source\ti\driverlib\m0p\dl_systick.h \
-  USER\Module\Board_Device\board_led.h \
-  ..\..\MSPM0G3507_FreeRTOS\ti_msp_dl_config.h \
-  USER\Module\Board_Driver\UART0_Debug.h \
-  USER\Module\Board_Driver\tim_delay.h
+  ..\..\source\ti\driverlib\m0p\dl_systick.h USER\Task\eight_ir_task.h \
+  USER\Module\Board_Device\eight_ir.h USER\Task\motor_task.h \
+  USER\Task\print_task.h

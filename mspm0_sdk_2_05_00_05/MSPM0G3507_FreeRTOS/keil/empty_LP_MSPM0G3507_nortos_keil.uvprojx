@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
+              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Algorithm;.\USER\Task;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -428,6 +428,28 @@
         </Group>
         <Group>
           <GroupName>USER/Algorithm</GroupName>
+          <Files>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Algorithm\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Algorithm\pid.h</FilePath>
+            </File>
+            <File>
+              <FileName>line_tracking.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Algorithm\line_tracking.c</FilePath>
+            </File>
+            <File>
+              <FileName>line_tracking.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Algorithm\line_tracking.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>USER/Module</GroupName>
@@ -463,6 +485,16 @@
               <FilePath>.\USER\Module\Board_Device\board_led.h</FilePath>
             </File>
             <File>
+              <FileName>eight_ir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\eight_ir.c</FilePath>
+            </File>
+            <File>
+              <FileName>eight_ir.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\eight_ir.h</FilePath>
+            </File>
+            <File>
               <FileName>motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USER\Module\Board_Device\mg310\motor.c</FilePath>
@@ -476,6 +508,38 @@
         </Group>
         <Group>
           <GroupName>USER/Task</GroupName>
+          <Files>
+            <File>
+              <FileName>eight_ir_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\eight_ir_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>eight_ir_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\eight_ir_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>motor_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\motor_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\motor_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>print_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\print_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>print_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\print_task.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>FreeRTOS/src</GroupName>

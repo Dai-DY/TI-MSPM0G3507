@@ -18,6 +18,8 @@ const GPIO5  = GPIO.addInstance();
 const GPIO6  = GPIO.addInstance();
 const GPIO7  = GPIO.addInstance();
 const GPIO8  = GPIO.addInstance();
+const GPIO9  = GPIO.addInstance();
+const GPIO10 = GPIO.addInstance();
 const PWM    = scripting.addModule("/ti/driverlib/PWM", {}, false);
 const PWM1   = PWM.addInstance();
 const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
@@ -128,6 +130,24 @@ GPIO8.associatedPins[1].polarity          = "RISE";
 GPIO8.associatedPins[1].interruptPriority = "0";
 GPIO8.associatedPins[1].interruptEn       = true;
 GPIO8.associatedPins[1].pin.$assign       = "PB20";
+
+GPIO9.$name                         = "EIGHT_IR";
+GPIO9.associatedPins.create(4);
+GPIO9.associatedPins[0].$name       = "AD0";
+GPIO9.associatedPins[0].pin.$assign = "PB17";
+GPIO9.associatedPins[1].$name       = "AD1";
+GPIO9.associatedPins[1].pin.$assign = "PB15";
+GPIO9.associatedPins[2].$name       = "AD2";
+GPIO9.associatedPins[2].pin.$assign = "PA31";
+GPIO9.associatedPins[3].$name       = "OUT";
+GPIO9.associatedPins[3].direction   = "INPUT";
+GPIO9.associatedPins[3].pin.$assign = "PB12";
+
+GPIO10.$name                              = "MOTOR_STBY";
+GPIO10.port                               = "PORTB";
+GPIO10.associatedPins[0].$name            = "STBY";
+GPIO10.associatedPins[0].initialValue     = "CLEARED";
+GPIO10.associatedPins[0].pin.$assign      = "PB14";
 
 SYSCTL.forceDefaultClkConfig = true;
 SYSCTL.clockTreeEn           = true;

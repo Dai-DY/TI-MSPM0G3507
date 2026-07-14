@@ -155,6 +155,12 @@ extern "C" {
 /* Defines for PIN_LED: GPIOB.9 with pinCMx 26 on package pin 61 */
 #define CAR_LED_PIN_LED_PIN                                      (DL_GPIO_PIN_9)
 #define CAR_LED_PIN_LED_IOMUX                                    (IOMUX_PINCM26)
+/* Port definition for Pin Group MOTOR_STBY */
+#define MOTOR_STBY_PORT                                                  (GPIOB)
+
+/* Defines for STBY: GPIOB.14 with pinCMx 31 on package pin 2 */
+#define MOTOR_STBY_STBY_PIN                                     (DL_GPIO_PIN_14)
+#define MOTOR_STBY_STBY_IOMUX                                    (IOMUX_PINCM31)
 /* Port definition for Pin Group BIN */
 #define BIN_PORT                                                         (GPIOA)
 
@@ -201,6 +207,22 @@ extern "C" {
 #define ENCODERB_E2B_IIDX                                   (DL_GPIO_IIDX_DIO20)
 #define ENCODERB_E2B_PIN                                        (DL_GPIO_PIN_20)
 #define ENCODERB_E2B_IOMUX                                       (IOMUX_PINCM48)
+/* Defines for AD0: GPIOB.17 with pinCMx 43 on package pin 14 */
+#define EIGHT_IR_AD0_PORT                                                (GPIOB)
+#define EIGHT_IR_AD0_PIN                                        (DL_GPIO_PIN_17)
+#define EIGHT_IR_AD0_IOMUX                                       (IOMUX_PINCM43)
+/* Defines for AD1: GPIOB.15 with pinCMx 32 on package pin 3 */
+#define EIGHT_IR_AD1_PORT                                                (GPIOB)
+#define EIGHT_IR_AD1_PIN                                        (DL_GPIO_PIN_15)
+#define EIGHT_IR_AD1_IOMUX                                       (IOMUX_PINCM32)
+/* Defines for AD2: GPIOA.31 with pinCMx 6 on package pin 39 */
+#define EIGHT_IR_AD2_PORT                                                (GPIOA)
+#define EIGHT_IR_AD2_PIN                                        (DL_GPIO_PIN_31)
+#define EIGHT_IR_AD2_IOMUX                                        (IOMUX_PINCM6)
+/* Defines for OUT: GPIOB.12 with pinCMx 29 on package pin 64 */
+#define EIGHT_IR_OUT_PORT                                                (GPIOB)
+#define EIGHT_IR_OUT_PIN                                        (DL_GPIO_PIN_12)
+#define EIGHT_IR_OUT_IOMUX                                       (IOMUX_PINCM29)
 
 /* clang-format on */
 
