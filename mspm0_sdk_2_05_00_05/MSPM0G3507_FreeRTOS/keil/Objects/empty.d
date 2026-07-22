@@ -75,4 +75,5 @@
   ..\..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\..\source\ti\driverlib\m0p\dl_systick.h USER\Task\eight_ir_task.h \
   USER\Module\Board_Device\eight_ir.h USER\Task\line_tracking_task.h \
-  USER\Task\motor_task.h USER\Task\print_task.h
+  USER\Task\motor_task.h USER\Task\mpu6050_task.h \
+  USER\Module\Board_Device\mpu6050\mpu6050_raw.h USER\Task\print_task.h

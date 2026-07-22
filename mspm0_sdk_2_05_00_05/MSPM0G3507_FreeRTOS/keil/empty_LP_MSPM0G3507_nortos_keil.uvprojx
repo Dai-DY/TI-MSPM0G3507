@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Algorithm;.\USER\Task;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
+              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Algorithm;.\USER\Task;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;.\USER\Module\Board_Device\mpu6050;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -510,6 +510,16 @@
           <GroupName>USER/Task</GroupName>
           <Files>
             <File>
+              <FileName>mpu6050_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\mpu6050_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\mpu6050_task.h</FilePath>
+            </File>
+            <File>
               <FileName>eight_ir_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USER\Task\eight_ir_task.c</FilePath>
@@ -548,6 +558,51 @@
               <FileName>print_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\USER\Task\print_task.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USER/MPU6050</GroupName>
+          <Files>
+            <File>
+              <FileName>mpu6050_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_raw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_raw.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_raw.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_raw.h</FilePath>
+            </File>
+            <File>
+              <FileName>mahony.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mahony.c</FilePath>
+            </File>
+            <File>
+              <FileName>mahony.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mahony.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_bias_store.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_bias_store.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_bias_store.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_bias_store.h</FilePath>
             </File>
           </Files>
         </Group>

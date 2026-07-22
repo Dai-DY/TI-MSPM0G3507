@@ -106,6 +106,22 @@ extern "C" {
 
 
 
+
+/* Defines for I2C_0 */
+#define I2C_0_INST                                                          I2C0
+#define I2C_0_INST_IRQHandler                                    I2C0_IRQHandler
+#define I2C_0_INST_INT_IRQN                                        I2C0_INT_IRQn
+#define I2C_0_BUS_SPEED_HZ                                                400000
+#define GPIO_I2C_0_SDA_PORT                                                GPIOA
+#define GPIO_I2C_0_SDA_PIN                                         DL_GPIO_PIN_0
+#define GPIO_I2C_0_IOMUX_SDA                                      (IOMUX_PINCM1)
+#define GPIO_I2C_0_IOMUX_SDA_FUNC                       IOMUX_PINCM1_PF_I2C0_SDA
+#define GPIO_I2C_0_SCL_PORT                                                GPIOA
+#define GPIO_I2C_0_SCL_PIN                                         DL_GPIO_PIN_1
+#define GPIO_I2C_0_IOMUX_SCL                                      (IOMUX_PINCM2)
+#define GPIO_I2C_0_IOMUX_SCL_FUNC                       IOMUX_PINCM2_PF_I2C0_SCL
+
+
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
 #define UART_DEBUG_INST_FREQUENCY                                       32000000
@@ -157,6 +173,16 @@ extern "C" {
 /* Defines for STBY: GPIOB.14 with pinCMx 31 on package pin 2 */
 #define MOTOR_STBY_STBY_PIN                                     (DL_GPIO_PIN_14)
 #define MOTOR_STBY_STBY_IOMUX                                    (IOMUX_PINCM31)
+/* Port definition for Pin Group MPU6050_INT */
+#define MPU6050_INT_PORT                                                 (GPIOA)
+
+/* Defines for PIN: GPIOA.7 with pinCMx 14 on package pin 49 */
+// pins affected by this interrupt request:["PIN"]
+#define MPU6050_INT_INT_IRQN                                    (GPIOA_INT_IRQn)
+#define MPU6050_INT_INT_IIDX                    (DL_INTERRUPT_GROUP1_IIDX_GPIOA)
+#define MPU6050_INT_PIN_IIDX                                 (DL_GPIO_IIDX_DIO7)
+#define MPU6050_INT_PIN_PIN                                      (DL_GPIO_PIN_7)
+#define MPU6050_INT_PIN_IOMUX                                    (IOMUX_PINCM14)
 /* Port definition for Pin Group BIN */
 #define BIN_PORT                                                         (GPIOA)
 
@@ -179,28 +205,18 @@ extern "C" {
 #define ENCODERA_PORT                                                    (GPIOA)
 
 /* Defines for E1A: GPIOA.26 with pinCMx 59 on package pin 30 */
-// pins affected by this interrupt request:["E1A","E1B"]
-#define ENCODERA_INT_IRQN                                       (GPIOA_INT_IRQn)
-#define ENCODERA_INT_IIDX                       (DL_INTERRUPT_GROUP1_IIDX_GPIOA)
-#define ENCODERA_E1A_IIDX                                   (DL_GPIO_IIDX_DIO26)
 #define ENCODERA_E1A_PIN                                        (DL_GPIO_PIN_26)
 #define ENCODERA_E1A_IOMUX                                       (IOMUX_PINCM59)
 /* Defines for E1B: GPIOA.25 with pinCMx 55 on package pin 26 */
-#define ENCODERA_E1B_IIDX                                   (DL_GPIO_IIDX_DIO25)
 #define ENCODERA_E1B_PIN                                        (DL_GPIO_PIN_25)
 #define ENCODERA_E1B_IOMUX                                       (IOMUX_PINCM55)
 /* Port definition for Pin Group ENCODERB */
 #define ENCODERB_PORT                                                    (GPIOB)
 
 /* Defines for E2A: GPIOB.24 with pinCMx 52 on package pin 23 */
-// pins affected by this interrupt request:["E2A","E2B"]
-#define ENCODERB_INT_IRQN                                       (GPIOB_INT_IRQn)
-#define ENCODERB_INT_IIDX                       (DL_INTERRUPT_GROUP1_IIDX_GPIOB)
-#define ENCODERB_E2A_IIDX                                   (DL_GPIO_IIDX_DIO24)
 #define ENCODERB_E2A_PIN                                        (DL_GPIO_PIN_24)
 #define ENCODERB_E2A_IOMUX                                       (IOMUX_PINCM52)
 /* Defines for E2B: GPIOB.20 with pinCMx 48 on package pin 19 */
-#define ENCODERB_E2B_IIDX                                   (DL_GPIO_IIDX_DIO20)
 #define ENCODERB_E2B_PIN                                        (DL_GPIO_PIN_20)
 #define ENCODERB_E2B_IOMUX                                       (IOMUX_PINCM48)
 /* Port definition for Pin Group EIGHT_IR */
@@ -227,6 +243,7 @@ void SYSCFG_DL_GPIO_init(void);
 void SYSCFG_DL_SYSCTL_init(void);
 void SYSCFG_DL_PWM_0_init(void);
 void SYSCFG_DL_TIM_delay_ms_init(void);
+void SYSCFG_DL_I2C_0_init(void);
 void SYSCFG_DL_UART_DEBUG_init(void);
 
 
