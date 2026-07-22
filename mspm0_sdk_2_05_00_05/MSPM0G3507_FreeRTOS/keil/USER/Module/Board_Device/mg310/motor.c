@@ -2,7 +2,7 @@
 
 #include "ti_msp_dl_config.h"
 
-#define MOTOR_PWM_PERIOD    8000U
+#define MOTOR_PWM_PERIOD    3200U
 #define MOTOR_COUNT         2U
 #define MOTOR_LEFT_INDEX    0U
 #define MOTOR_RIGHT_INDEX   1U

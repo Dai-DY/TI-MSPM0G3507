@@ -530,6 +530,16 @@
               <FilePath>.\USER\Task\motor_task.h</FilePath>
             </File>
             <File>
+              <FileName>line_tracking_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\line_tracking_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>line_tracking_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\line_tracking_task.h</FilePath>
+            </File>
+            <File>
               <FileName>print_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USER\Task\print_task.c</FilePath>

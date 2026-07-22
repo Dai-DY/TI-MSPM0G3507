@@ -4,10 +4,11 @@
 #include "task.h"
 
 #include "eight_ir.h"
+#include "line_tracking_task.h"
 
 #define EIGHT_IR_TASK_STACK_SIZE    256U
 #define EIGHT_IR_TASK_PRIORITY      2U
-#define EIGHT_IR_SAMPLE_PERIOD_MS   20U
+#define EIGHT_IR_SAMPLE_PERIOD_MS   5U
 
 static StaticTask_t eight_ir_task_tcb;
 static StackType_t eight_ir_task_stack[EIGHT_IR_TASK_STACK_SIZE];
@@ -29,6 +30,8 @@ static void eight_ir_task(void *parameters)
         taskENTER_CRITICAL();
         latest_ir_data = sample;
         taskEXIT_CRITICAL();
+
+        line_tracking_task_notify_sensor_update();
 
         vTaskDelayUntil(
             &last_wake_time, pdMS_TO_TICKS(EIGHT_IR_SAMPLE_PERIOD_MS));

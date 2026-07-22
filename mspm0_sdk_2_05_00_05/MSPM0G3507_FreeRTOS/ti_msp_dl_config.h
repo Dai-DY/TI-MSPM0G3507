@@ -73,12 +73,8 @@ extern "C" {
 #define POWER_STARTUP_DELAY                                                (16)
 
 
-#define GPIO_HFXT_PORT                                                     GPIOA
-#define GPIO_HFXIN_PIN                                             DL_GPIO_PIN_5
-#define GPIO_HFXIN_IOMUX                                         (IOMUX_PINCM10)
-#define GPIO_HFXOUT_PIN                                            DL_GPIO_PIN_6
-#define GPIO_HFXOUT_IOMUX                                        (IOMUX_PINCM11)
-#define CPUCLK_FREQ                                                     80000000
+
+#define CPUCLK_FREQ                                                     32000000
 
 
 
@@ -86,7 +82,7 @@ extern "C" {
 #define PWM_0_INST                                                         TIMA1
 #define PWM_0_INST_IRQHandler                                   TIMA1_IRQHandler
 #define PWM_0_INST_INT_IRQN                                     (TIMA1_INT_IRQn)
-#define PWM_0_INST_CLK_FREQ                                             80000000
+#define PWM_0_INST_CLK_FREQ                                             32000000
 /* GPIO defines for channel 0 */
 #define GPIO_PWM_0_C0_PORT                                                 GPIOB
 #define GPIO_PWM_0_C0_PIN                                          DL_GPIO_PIN_2
@@ -106,13 +102,13 @@ extern "C" {
 #define TIM_delay_ms_INST                                                (TIMA0)
 #define TIM_delay_ms_INST_IRQHandler                            TIMA0_IRQHandler
 #define TIM_delay_ms_INST_INT_IRQN                              (TIMA0_INT_IRQn)
-#define TIM_delay_ms_INST_LOAD_VALUE                                        (1U)
+#define TIM_delay_ms_INST_LOAD_VALUE                                      (999U)
 
 
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       40000000
+#define UART_DEBUG_INST_FREQUENCY                                       32000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -124,8 +120,8 @@ extern "C" {
 #define GPIO_UART_DEBUG_IOMUX_RX_FUNC                  IOMUX_PINCM22_PF_UART0_RX
 #define GPIO_UART_DEBUG_IOMUX_TX_FUNC                  IOMUX_PINCM21_PF_UART0_TX
 #define UART_DEBUG_BAUD_RATE                                            (115200)
-#define UART_DEBUG_IBRD_40_MHZ_115200_BAUD                                  (21)
-#define UART_DEBUG_FBRD_40_MHZ_115200_BAUD                                  (45)
+#define UART_DEBUG_IBRD_32_MHZ_115200_BAUD                                  (17)
+#define UART_DEBUG_FBRD_32_MHZ_115200_BAUD                                  (23)
 
 
 
@@ -207,22 +203,21 @@ extern "C" {
 #define ENCODERB_E2B_IIDX                                   (DL_GPIO_IIDX_DIO20)
 #define ENCODERB_E2B_PIN                                        (DL_GPIO_PIN_20)
 #define ENCODERB_E2B_IOMUX                                       (IOMUX_PINCM48)
-/* Defines for AD0: GPIOB.17 with pinCMx 43 on package pin 14 */
-#define EIGHT_IR_AD0_PORT                                                (GPIOB)
-#define EIGHT_IR_AD0_PIN                                        (DL_GPIO_PIN_17)
-#define EIGHT_IR_AD0_IOMUX                                       (IOMUX_PINCM43)
-/* Defines for AD1: GPIOB.15 with pinCMx 32 on package pin 3 */
-#define EIGHT_IR_AD1_PORT                                                (GPIOB)
-#define EIGHT_IR_AD1_PIN                                        (DL_GPIO_PIN_15)
-#define EIGHT_IR_AD1_IOMUX                                       (IOMUX_PINCM32)
-/* Defines for AD2: GPIOA.31 with pinCMx 6 on package pin 39 */
-#define EIGHT_IR_AD2_PORT                                                (GPIOA)
-#define EIGHT_IR_AD2_PIN                                        (DL_GPIO_PIN_31)
-#define EIGHT_IR_AD2_IOMUX                                        (IOMUX_PINCM6)
-/* Defines for OUT: GPIOB.12 with pinCMx 29 on package pin 64 */
-#define EIGHT_IR_OUT_PORT                                                (GPIOB)
-#define EIGHT_IR_OUT_PIN                                        (DL_GPIO_PIN_12)
-#define EIGHT_IR_OUT_IOMUX                                       (IOMUX_PINCM29)
+/* Port definition for Pin Group EIGHT_IR */
+#define EIGHT_IR_PORT                                                    (GPIOB)
+
+/* Defines for AD0: GPIOB.15 with pinCMx 32 on package pin 3 */
+#define EIGHT_IR_AD0_PIN                                        (DL_GPIO_PIN_15)
+#define EIGHT_IR_AD0_IOMUX                                       (IOMUX_PINCM32)
+/* Defines for AD1: GPIOB.16 with pinCMx 33 on package pin 4 */
+#define EIGHT_IR_AD1_PIN                                        (DL_GPIO_PIN_16)
+#define EIGHT_IR_AD1_IOMUX                                       (IOMUX_PINCM33)
+/* Defines for AD2: GPIOB.17 with pinCMx 43 on package pin 14 */
+#define EIGHT_IR_AD2_PIN                                        (DL_GPIO_PIN_17)
+#define EIGHT_IR_AD2_IOMUX                                       (IOMUX_PINCM43)
+/* Defines for OUT: GPIOB.18 with pinCMx 44 on package pin 15 */
+#define EIGHT_IR_OUT_PIN                                        (DL_GPIO_PIN_18)
+#define EIGHT_IR_OUT_IOMUX                                       (IOMUX_PINCM44)
 
 /* clang-format on */
 

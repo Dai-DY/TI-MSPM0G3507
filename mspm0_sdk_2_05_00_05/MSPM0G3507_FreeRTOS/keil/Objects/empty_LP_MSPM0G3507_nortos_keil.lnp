@@ -11,6 +11,7 @@
 ".\objects\motor.o"
 ".\objects\eight_ir_task.o"
 ".\objects\motor_task.o"
+".\objects\line_tracking_task.o"
 ".\objects\print_task.o"
 ".\objects\croutine.o"
 ".\objects\event_groups.o"
