@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__MSPM0G3507__</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Algorithm;.\USER\Task;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
+              <IncludePath>..\..\source\third_party\CMSIS\Core\Include;..\..\source;.\USER\Algorithm;.\USER\Task;.\USER\Module\Board_Driver;.\USER\Module\Board_Device;.\USER\Module\Board_Device\mg310;.\USER\Module\Board_Device\mpu6050;..\..\MSPM0G3507_FreeRTOS;.\FreeRTOS\include;.\FreeRTOS\portable\MemMang;.\FreeRTOS\portable\GCC\ARM_CM0;.\FreeRTOS\src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -507,6 +507,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>USER/MPU6050</GroupName>
+          <Files>
+            <File>
+              <FileName>MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\MPU6050.h</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>dmpKey.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\dmpKey.h</FilePath>
+            </File>
+            <File>
+              <FileName>dmpmap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\dmpmap.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>USER/Task</GroupName>
           <Files>
             <File>
@@ -548,6 +603,16 @@
               <FileName>print_task.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\USER\Task\print_task.h</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\mpu6050_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\USER\Task\mpu6050_task.h</FilePath>
             </File>
           </Files>
         </Group>

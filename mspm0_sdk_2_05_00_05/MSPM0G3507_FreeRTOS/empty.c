@@ -4,6 +4,7 @@
 #include "ti_msp_dl_config.h"
 #include "eight_ir_task.h"
 #include "line_tracking_task.h"
+#include "mpu6050_task.h"
 #include "motor_task.h"
 #include "print_task.h"
 
@@ -15,6 +16,7 @@ int main(void)
     line_tracking_task_create();
     eight_ir_task_create();
     print_task_create();
+    mpu6050_task_create();
 
     vTaskStartScheduler();
 
