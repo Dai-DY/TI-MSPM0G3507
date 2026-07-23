@@ -74,8 +74,9 @@
   ..\..\source\ti\driverlib\dl_wwdt.h \
   ..\..\source\ti\driverlib\m0p\dl_interrupt.h \
   ..\..\source\ti\driverlib\m0p\dl_systick.h USER\Task\eight_ir_task.h \
-  USER\Module\Board_Device\eight_ir.h USER\Task\line_tracking_task.h \
-  USER\Task\mpu6050_task.h USER\Module\Board_Device\mpu6050\MPU6050.h \
+  USER\Module\Board_Device\eight_ir.h USER\Task\led_task.h \
+  USER\Task\line_tracking_task.h USER\Task\mpu6050_task.h \
+  USER\Module\Board_Device\mpu6050\MPU6050.h \
   USER\Module\Board_Device\mpu6050\inv_mpu.h \
   USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.h \
   USER\Module\Board_Device\mpu6050\dmpKey.h \
