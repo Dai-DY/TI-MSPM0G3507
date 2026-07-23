@@ -9,23 +9,18 @@
 #include "dmpmap.h"
 
 //imu变量
-typedef struct{
-    float x;
-    float y;
-    float z;
-}imu_val;
-
-typedef struct{
-    imu_val gyro;
-    imu_val accel;
-    float roll;
-    float pitch;
-    float yaw;
-}Imu_t;
+/* Public IMU data, matching the six-value layout used by the RM project. */
+typedef struct {
+    float pitch;       /* degrees */
+    float yaw;         /* degrees */
+    float roll;        /* degrees */
+    float gyroYaw;     /* degrees/second */
+    float gyroPitch;   /* degrees/second */
+    float gyroRoll;    /* degrees/second */
+} Imu_t;
 
 //全局变量
 extern Imu_t mpu6050;
-extern Imu_t RegOri_mpu6050;
 
 #define devAddr  0x68
 

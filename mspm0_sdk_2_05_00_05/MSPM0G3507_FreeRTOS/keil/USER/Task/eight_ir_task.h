@@ -3,7 +3,7 @@
 
 #include "eight_ir.h"
 
-extern volatile eight_ir_data_t latest_ir_data;
+extern eight_ir_data_t ir_data;
 
 void eight_ir_task_create(void);
 

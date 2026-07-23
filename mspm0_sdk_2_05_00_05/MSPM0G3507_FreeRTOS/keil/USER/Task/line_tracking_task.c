@@ -67,9 +67,7 @@ static void line_tracking_task(void *parameters)
     for (;;) {
         (void) ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
-        taskENTER_CRITICAL();
-        sensor_data = latest_ir_data;
-        taskEXIT_CRITICAL();
+        sensor_data = ir_data;
 
         now = xTaskGetTickCount();
 

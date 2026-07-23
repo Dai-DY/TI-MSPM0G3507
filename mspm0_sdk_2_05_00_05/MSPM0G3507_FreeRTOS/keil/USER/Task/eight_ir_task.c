@@ -12,7 +12,7 @@
 
 static StaticTask_t eight_ir_task_tcb;
 static StackType_t eight_ir_task_stack[EIGHT_IR_TASK_STACK_SIZE];
-volatile eight_ir_data_t latest_ir_data = { { 0U }, 0U };
+eight_ir_data_t ir_data = { { 0U }, 0U };
 
 static void eight_ir_task(void *parameters)
 {
@@ -27,9 +27,7 @@ static void eight_ir_task(void *parameters)
     for (;;) {
         eight_ir_read(&sample);
 
-        taskENTER_CRITICAL();
-        latest_ir_data = sample;
-        taskEXIT_CRITICAL();
+        ir_data = sample;
 
         line_tracking_task_notify_sensor_update();
 

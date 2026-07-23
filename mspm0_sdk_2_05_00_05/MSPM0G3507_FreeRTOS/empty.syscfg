@@ -11,7 +11,6 @@
  */
 const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
 const GPIO1  = GPIO.addInstance();
-const GPIO2  = GPIO.addInstance();
 const GPIO3  = GPIO.addInstance();
 const GPIO4  = GPIO.addInstance();
 const GPIO5  = GPIO.addInstance();
@@ -50,14 +49,6 @@ GPIO1.associatedPins[0].pin.$assign       = "PB21";
 
 const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
 
-GPIO2.$name                              = "LED";
-GPIO2.port                               = "PORTB";
-GPIO2.associatedPins[0].$name            = "B22";
-GPIO2.associatedPins[0].ioStructure      = "SD";
-GPIO2.associatedPins[0].internalResistor = "PULL_DOWN";
-GPIO2.associatedPins[0].assignedPin      = "22";
-GPIO2.associatedPins[0].pin.$assign      = "PB22";
-
 GPIO3.$name                         = "CAR_KEY";
 GPIO3.associatedPins[0].$name       = "PIN_KEY";
 GPIO3.associatedPins[0].direction   = "INPUT";
@@ -65,6 +56,7 @@ GPIO3.associatedPins[0].pin.$assign = "PA18";
 
 GPIO4.$name                         = "CAR_LED";
 GPIO4.associatedPins[0].$name       = "PIN_LED";
+GPIO4.associatedPins[0].initialValue = "SET";
 GPIO4.associatedPins[0].pin.$assign = "PB9";
 
 GPIO5.port                          = "PORTA";

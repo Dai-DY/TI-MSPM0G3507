@@ -149,12 +149,6 @@ extern "C" {
 /* Defines for B21: GPIOB.21 with pinCMx 49 on package pin 20 */
 #define KEY_B21_PIN                                             (DL_GPIO_PIN_21)
 #define KEY_B21_IOMUX                                            (IOMUX_PINCM49)
-/* Port definition for Pin Group LED */
-#define LED_PORT                                                         (GPIOB)
-
-/* Defines for B22: GPIOB.22 with pinCMx 50 on package pin 21 */
-#define LED_B22_PIN                                             (DL_GPIO_PIN_22)
-#define LED_B22_IOMUX                                            (IOMUX_PINCM50)
 /* Port definition for Pin Group CAR_KEY */
 #define CAR_KEY_PORT                                                     (GPIOA)
 

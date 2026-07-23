@@ -27,16 +27,11 @@ static TaskHandle_t mpu6050_task_handle;
 
 static volatile mpu6050_status_t current_status =
     MPU6050_STATUS_UNINITIALIZED;
-static volatile uint32_t interrupt_count;
-static mpu6050_snapshot_t latest_snapshot;
 
 static void set_status(mpu6050_status_t status)
 {
     taskENTER_CRITICAL();
     current_status = status;
-    if (status != MPU6050_STATUS_RUNNING) {
-        latest_snapshot.valid = false;
-    }
     taskEXIT_CRITICAL();
 }
 
@@ -47,25 +42,16 @@ static int initialize_sensor(void)
 
     mpu6050_port_delay_ms(MPU6050_STARTUP_DELAY_MS);
     if (mpu6050_port_init() != 0) {
-        taskENTER_CRITICAL();
-        latest_snapshot.i2c_error_count++;
-        taskEXIT_CRITICAL();
         set_status(MPU6050_STATUS_DEVICE_NOT_FOUND);
         return -1;
     }
 
     if (MPU6050_initialize() != 0) {
-        taskENTER_CRITICAL();
-        latest_snapshot.i2c_error_count++;
-        taskEXIT_CRITICAL();
         set_status(MPU6050_STATUS_DEVICE_NOT_FOUND);
         return -1;
     }
 
     if (DMP_Init() != 0) {
-        taskENTER_CRITICAL();
-        latest_snapshot.i2c_error_count++;
-        taskEXIT_CRITICAL();
         set_status(MPU6050_STATUS_DMP_INIT_FAILED);
         return -1;
     }
@@ -78,6 +64,7 @@ static int initialize_sensor(void)
 
 static int read_dmp_sample(Imu_t *sample)
 {
+    float gyro_sensitivity;
     unsigned long sensor_timestamp;
     unsigned char more;
     unsigned char valid_sample = 0U;
@@ -87,6 +74,11 @@ static int read_dmp_sample(Imu_t *sample)
     long quaternion[4];
 
     if (sample == NULL) {
+        return -1;
+    }
+
+    if ((mpu_get_gyro_sens(&gyro_sensitivity) != 0) ||
+        (gyro_sensitivity <= 0.0f)) {
         return -1;
     }
 
@@ -120,32 +112,13 @@ static int read_dmp_sample(Imu_t *sample)
                           q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3) *
             MPU6050_RAD_TO_DEGREES;
 
-        sample->gyro.x = (float) local_gyro[0];
-        sample->gyro.y = (float) local_gyro[1];
-        sample->gyro.z = (float) local_gyro[2];
-        sample->accel.x = (float) local_accel[0];
-        sample->accel.y = (float) local_accel[1];
-        sample->accel.z = (float) local_accel[2];
+        sample->gyroRoll = (float) local_gyro[0] / gyro_sensitivity;
+        sample->gyroPitch = (float) local_gyro[1] / gyro_sensitivity;
+        sample->gyroYaw = (float) local_gyro[2] / gyro_sensitivity;
         valid_sample = 1U;
     } while (more != 0U);
 
     return (valid_sample != 0U) ? 0 : -1;
-}
-
-static void publish_sample(const Imu_t *sample)
-{
-    unsigned long timestamp_ms;
-
-    mpu6050_port_get_ms(&timestamp_ms);
-
-    taskENTER_CRITICAL();
-    latest_snapshot.imu = *sample;
-    latest_snapshot.timestamp_ms = (uint32_t) timestamp_ms;
-    latest_snapshot.sample_count++;
-    latest_snapshot.interrupt_count = interrupt_count;
-    latest_snapshot.valid = true;
-    mpu6050 = *sample;
-    taskEXIT_CRITICAL();
 }
 
 static void mpu6050_task(void *parameters)
@@ -174,9 +147,6 @@ static void mpu6050_task(void *parameters)
             }
 
             if (read_dmp_sample(&sample) != 0) {
-                taskENTER_CRITICAL();
-                latest_snapshot.fifo_error_count++;
-                taskEXIT_CRITICAL();
                 consecutive_errors++;
                 if (consecutive_errors >= MPU6050_MAX_CONSECUTIVE_ERRORS) {
                     set_status(MPU6050_STATUS_FIFO_ERROR);
@@ -186,7 +156,7 @@ static void mpu6050_task(void *parameters)
             }
 
             consecutive_errors = 0U;
-            publish_sample(&sample);
+            mpu6050 = sample;
         }
 
         NVIC_DisableIRQ(MPU6050_INT_INT_IRQN);
@@ -199,30 +169,12 @@ static void mpu6050_task(void *parameters)
 
 void mpu6050_task_create(void)
 {
-    memset(&latest_snapshot, 0, sizeof(latest_snapshot));
-    interrupt_count = 0U;
+    memset(&mpu6050, 0, sizeof(mpu6050));
     current_status = MPU6050_STATUS_UNINITIALIZED;
 
     mpu6050_task_handle = xTaskCreateStatic(mpu6050_task, "MPU6050",
         MPU6050_TASK_STACK_SIZE, NULL, MPU6050_TASK_PRIORITY,
         mpu6050_task_stack, &mpu6050_task_tcb);
-}
-
-bool mpu6050_get_snapshot(mpu6050_snapshot_t *snapshot)
-{
-    bool valid;
-
-    if (snapshot == NULL) {
-        return false;
-    }
-
-    taskENTER_CRITICAL();
-    *snapshot = latest_snapshot;
-    snapshot->interrupt_count = interrupt_count;
-    valid = latest_snapshot.valid;
-    taskEXIT_CRITICAL();
-
-    return valid;
 }
 
 mpu6050_status_t mpu6050_get_status(void)
@@ -246,7 +198,6 @@ void GROUP1_IRQHandler(void)
 
         DL_GPIO_clearInterruptStatus(
             MPU6050_INT_PORT, MPU6050_INT_PIN_PIN);
-        interrupt_count++;
 
         if (mpu6050_task_handle != NULL) {
             vTaskNotifyGiveFromISR(

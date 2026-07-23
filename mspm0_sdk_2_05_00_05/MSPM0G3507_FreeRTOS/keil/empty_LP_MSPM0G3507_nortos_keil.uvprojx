@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>empty_LP_MSPM0G3507_nortos_keil</TargetName>
+      <TargetName>MSPM0G3507_FreeRTOS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
@@ -382,17 +382,22 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source</GroupName>
+          <GroupName>Application/MDK-ARM</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_mspm0g350x_uvision.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>startup_mspm0g350x_uvision.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
               <FileName>empty.c</FileName>
               <FileType>1</FileType>
               <FilePath>../empty.c</FilePath>
-            </File>
-            <File>
-              <FileName>empty.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\empty.h</FilePath>
             </File>
             <File>
               <FileName>ti_msp_dl_config.c</FileName>
@@ -415,11 +420,6 @@
               <FilePath>../empty.syscfg</FilePath>
             </File>
             <File>
-              <FileName>startup_mspm0g350x_uvision.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>startup_mspm0g350x_uvision.s</FilePath>
-            </File>
-            <File>
               <FileName>README.md</FileName>
               <FileType>5</FileType>
               <FilePath>..\README.md</FilePath>
@@ -427,197 +427,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER/Algorithm</GroupName>
-          <Files>
-            <File>
-              <FileName>pid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Algorithm\pid.c</FilePath>
-            </File>
-            <File>
-              <FileName>pid.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Algorithm\pid.h</FilePath>
-            </File>
-            <File>
-              <FileName>line_tracking.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Algorithm\line_tracking.c</FilePath>
-            </File>
-            <File>
-              <FileName>line_tracking.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Algorithm\line_tracking.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USER/Module</GroupName>
-          <Files>
-            <File>
-              <FileName>tim_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Driver\tim_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>tim_delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Driver\tim_delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>UART0_Debug.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Driver\UART0_Debug.c</FilePath>
-            </File>
-            <File>
-              <FileName>UART0_Debug.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Driver\UART0_Debug.h</FilePath>
-            </File>
-            <File>
-              <FileName>board_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\board_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>board_led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\board_led.h</FilePath>
-            </File>
-            <File>
-              <FileName>eight_ir.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\eight_ir.c</FilePath>
-            </File>
-            <File>
-              <FileName>eight_ir.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\eight_ir.h</FilePath>
-            </File>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\mg310\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mg310\motor.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USER/MPU6050</GroupName>
-          <Files>
-            <File>
-              <FileName>MPU6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\MPU6050.c</FilePath>
-            </File>
-            <File>
-              <FileName>MPU6050.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\MPU6050.h</FilePath>
-            </File>
-            <File>
-              <FileName>inv_mpu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu.c</FilePath>
-            </File>
-            <File>
-              <FileName>inv_mpu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu.h</FilePath>
-            </File>
-            <File>
-              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.c</FilePath>
-            </File>
-            <File>
-              <FileName>inv_mpu_dmp_motion_driver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.h</FilePath>
-            </File>
-            <File>
-              <FileName>dmpKey.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\dmpKey.h</FilePath>
-            </File>
-            <File>
-              <FileName>dmpmap.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\dmpmap.h</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050_port.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USER/Task</GroupName>
-          <Files>
-            <File>
-              <FileName>eight_ir_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Task\eight_ir_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>eight_ir_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Task\eight_ir_task.h</FilePath>
-            </File>
-            <File>
-              <FileName>motor_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Task\motor_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Task\motor_task.h</FilePath>
-            </File>
-            <File>
-              <FileName>line_tracking_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Task\line_tracking_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>line_tracking_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Task\line_tracking_task.h</FilePath>
-            </File>
-            <File>
-              <FileName>print_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Task\print_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>print_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Task\print_task.h</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USER\Task\mpu6050_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050_task.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\USER\Task\mpu6050_task.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FreeRTOS/src</GroupName>
+          <GroupName>Middlewares/FreeRTOS</GroupName>
           <Files>
             <File>
               <FileName>croutine.c</FileName>
@@ -654,11 +464,6 @@
               <FileType>1</FileType>
               <FilePath>.\FreeRTOS\src\timers.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FreeRTOS/port</GroupName>
-          <Files>
             <File>
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
@@ -668,6 +473,106 @@
               <FileName>port.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\FreeRTOS\portable\GCC\ARM_CM0\port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Components</GroupName>
+          <Files>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Algorithm\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>line_tracking.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Algorithm\line_tracking.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Driver\tim_delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART0_Debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Driver\UART0_Debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>board_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\board_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>eight_ir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\eight_ir.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mg310\motor.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/IMU</GroupName>
+          <Files>
+            <File>
+              <FileName>MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\inv_mpu_dmp_motion_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Module\Board_Device\mpu6050\mpu6050_port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Tasks</GroupName>
+          <Files>
+            <File>
+              <FileName>eight_ir_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\eight_ir_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\motor_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>line_tracking_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\line_tracking_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>print_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\print_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\mpu6050_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>led_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\Task\led_task.c</FilePath>
             </File>
           </Files>
         </Group>

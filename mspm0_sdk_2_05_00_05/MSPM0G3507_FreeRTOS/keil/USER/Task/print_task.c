@@ -23,9 +23,7 @@ static void print_task(void *parameters)
     debug_uart_init();
 
     for (;;) {
-        taskENTER_CRITICAL();
-        sensor_data = latest_ir_data;
-        taskEXIT_CRITICAL();
+        sensor_data = ir_data;
 
         printf("IR: %u%u%u%u%u%u%u%u  mask=0x%02X\n",
             (unsigned int) sensor_data.values[7],

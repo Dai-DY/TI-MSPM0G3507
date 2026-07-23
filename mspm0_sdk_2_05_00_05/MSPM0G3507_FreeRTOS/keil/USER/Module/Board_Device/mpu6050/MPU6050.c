@@ -16,7 +16,6 @@ static signed char gyro_orientation[9] = {-1, 0, 0,
                                            0, 0, 1};
 
 Imu_t mpu6050 = { 0 };
-Imu_t RegOri_mpu6050 = { 0 };
 
 //iic转接
 uint8_t IICwriteBits(uint8_t addr,uint8_t reg,uint8_t bitStart,uint8_t length,uint8_t data)

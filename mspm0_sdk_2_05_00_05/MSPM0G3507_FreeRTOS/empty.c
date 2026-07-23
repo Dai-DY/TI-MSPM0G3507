@@ -3,6 +3,7 @@
 
 #include "ti_msp_dl_config.h"
 #include "eight_ir_task.h"
+#include "led_task.h"
 #include "line_tracking_task.h"
 #include "mpu6050_task.h"
 #include "motor_task.h"
@@ -12,6 +13,7 @@ int main(void)
 {
     SYSCFG_DL_init();
 
+    led_task_create();
     motor_task_create();
     line_tracking_task_create();
     eight_ir_task_create();

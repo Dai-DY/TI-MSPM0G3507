@@ -93,14 +93,14 @@ bool line_tracking_update(line_tracking_t *tracker,
     const uint8_t sensor_values[LINE_TRACKING_SENSOR_COUNT],
     line_tracking_output_t *output)
 {
-    bool x1;
-    bool x2;
-    bool x3;
-    bool x4;
-    bool x5;
-    bool x6;
-    bool x7;
-    bool x8;
+    uint8_t x1;
+    uint8_t x2;
+    uint8_t x3;
+    uint8_t x4;
+    uint8_t x5;
+    uint8_t x6;
+    uint8_t x7;
+    uint8_t x8;
     int16_t error;
     uint8_t active_mask;
 
@@ -109,14 +109,14 @@ bool line_tracking_update(line_tracking_t *tracker,
     }
 
     active_mask = make_active_mask(tracker, sensor_values);
-    x1 = (active_mask & (1U << 0U)) != 0U;
-    x2 = (active_mask & (1U << 1U)) != 0U;
-    x3 = (active_mask & (1U << 2U)) != 0U;
-    x4 = (active_mask & (1U << 3U)) != 0U;
-    x5 = (active_mask & (1U << 4U)) != 0U;
-    x6 = (active_mask & (1U << 5U)) != 0U;
-    x7 = (active_mask & (1U << 6U)) != 0U;
-    x8 = (active_mask & (1U << 7U)) != 0U;
+    x1 = (uint8_t) ((active_mask >> 0U) & 0x01U);
+    x2 = (uint8_t) ((active_mask >> 1U) & 0x01U);
+    x3 = (uint8_t) ((active_mask >> 2U) & 0x01U);
+    x4 = (uint8_t) ((active_mask >> 3U) & 0x01U);
+    x5 = (uint8_t) ((active_mask >> 4U) & 0x01U);
+    x6 = (uint8_t) ((active_mask >> 5U) & 0x01U);
+    x7 = (uint8_t) ((active_mask >> 6U) & 0x01U);
+    x8 = (uint8_t) ((active_mask >> 7U) & 0x01U);
 
     output->active_mask = active_mask;
     output->mode = LINE_TRACKING_MODE_TRACK;
