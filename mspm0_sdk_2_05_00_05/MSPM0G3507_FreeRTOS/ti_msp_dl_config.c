@@ -57,6 +57,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_init(void)
     SYSCFG_DL_TIM_delay_ms_init();
     SYSCFG_DL_I2C_0_init();
     SYSCFG_DL_UART_DEBUG_init();
+    SYSCFG_DL_SYSCTL_CLK_init();
     /* Ensure backup structures have no valid state */
 	gPWM_0Backup.backupRdy 	= false;
 	gTIM_delay_msBackup.backupRdy 	= false;
@@ -206,29 +207,60 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 }
 
 
-
+static const DL_SYSCTL_SYSPLLConfig gSYSPLLConfig = {
+    .inputFreq              = DL_SYSCTL_SYSPLL_INPUT_FREQ_16_32_MHZ,
+	.rDivClk2x              = 3,
+	.rDivClk1               = 0,
+	.rDivClk0               = 0,
+	.enableCLK2x            = DL_SYSCTL_SYSPLL_CLK2X_ENABLE,
+	.enableCLK1             = DL_SYSCTL_SYSPLL_CLK1_DISABLE,
+	.enableCLK0             = DL_SYSCTL_SYSPLL_CLK0_DISABLE,
+	.sysPLLMCLK             = DL_SYSCTL_SYSPLL_MCLK_CLK2X,
+	.sysPLLRef              = DL_SYSCTL_SYSPLL_REF_SYSOSC,
+	.qDiv                   = 9,
+	.pDiv                   = DL_SYSCTL_SYSPLL_PDIV_2
+};
 SYSCONFIG_WEAK void SYSCFG_DL_SYSCTL_init(void)
 {
 
 	//Low Power Mode is configured to be SLEEP0
     DL_SYSCTL_setBORThreshold(DL_SYSCTL_BOR_THRESHOLD_LEVEL_0);
+    DL_SYSCTL_setFlashWaitState(DL_SYSCTL_FLASH_WAIT_STATE_2);
 
     
 	DL_SYSCTL_setSYSOSCFreq(DL_SYSCTL_SYSOSC_FREQ_BASE);
 	/* Set default configuration */
 	DL_SYSCTL_disableHFXT();
 	DL_SYSCTL_disableSYSPLL();
+    DL_SYSCTL_configSYSPLL((DL_SYSCTL_SYSPLLConfig *) &gSYSPLLConfig);
+    DL_SYSCTL_setULPCLKDivider(DL_SYSCTL_ULPCLK_DIV_2);
     DL_SYSCTL_enableMFCLK();
+    DL_SYSCTL_setMCLKSource(SYSOSC, HSCLK, DL_SYSCTL_HSCLK_SOURCE_SYSPLL);
     /* INT_GROUP1 Priority */
     NVIC_SetPriority(GPIOA_INT_IRQn, 2);
 
 }
+SYSCONFIG_WEAK void SYSCFG_DL_SYSCTL_CLK_init(void) {
+    while ((DL_SYSCTL_getClockStatus() & (DL_SYSCTL_CLK_STATUS_SYSPLL_GOOD
+		 | DL_SYSCTL_CLK_STATUS_HSCLK_GOOD
+		 | DL_SYSCTL_CLK_STATUS_LFOSC_GOOD))
+	       != (DL_SYSCTL_CLK_STATUS_SYSPLL_GOOD
+		 | DL_SYSCTL_CLK_STATUS_HSCLK_GOOD
+		 | DL_SYSCTL_CLK_STATUS_LFOSC_GOOD))
+	{
+		/* Ensure that clocks are in default POR configuration before initialization.
+		* Additionally once LFXT is enabled, the internal LFOSC is disabled, and cannot
+		* be re-enabled other than by executing a BOOTRST. */
+		;
+	}
+}
+
 
 
 /*
- * Timer clock configuration to be sourced by  / 1 (32000000 Hz)
+ * Timer clock configuration to be sourced by  / 1 (80000000 Hz)
  * timerClkFreq = (timerClkSrc / (timerClkDivRatio * (timerClkPrescale + 1)))
- *   32000000 Hz = 32000000 Hz / (1 * (0 + 1))
+ *   80000000 Hz = 80000000 Hz / (1 * (0 + 1))
  */
 static const DL_TimerA_ClockConfig gPWM_0ClockConfig = {
     .clockSel = DL_TIMER_CLOCK_BUSCLK,
@@ -332,7 +364,7 @@ SYSCONFIG_WEAK void SYSCFG_DL_I2C_0_init(void) {
     /* Configure Controller Mode */
     DL_I2C_resetControllerTransfer(I2C_0_INST);
     /* Set frequency to 400000 Hz*/
-    DL_I2C_setTimerPeriod(I2C_0_INST, 7);
+    DL_I2C_setTimerPeriod(I2C_0_INST, 9);
     DL_I2C_setControllerTXFIFOThreshold(I2C_0_INST, DL_I2C_TX_FIFO_LEVEL_EMPTY);
     DL_I2C_setControllerRXFIFOThreshold(I2C_0_INST, DL_I2C_RX_FIFO_LEVEL_BYTES_1);
     DL_I2C_enableControllerClockStretching(I2C_0_INST);
@@ -366,10 +398,10 @@ SYSCONFIG_WEAK void SYSCFG_DL_UART_DEBUG_init(void)
     /*
      * Configure baud rate by setting oversampling and baud rate divisors.
      *  Target baud rate: 115200
-     *  Actual baud rate: 115211.52
+     *  Actual baud rate: 115190.78
      */
     DL_UART_Main_setOversampling(UART_DEBUG_INST, DL_UART_OVERSAMPLING_RATE_16X);
-    DL_UART_Main_setBaudRateDivisor(UART_DEBUG_INST, UART_DEBUG_IBRD_32_MHZ_115200_BAUD, UART_DEBUG_FBRD_32_MHZ_115200_BAUD);
+    DL_UART_Main_setBaudRateDivisor(UART_DEBUG_INST, UART_DEBUG_IBRD_40_MHZ_115200_BAUD, UART_DEBUG_FBRD_40_MHZ_115200_BAUD);
 
 
     /* Configure Interrupts */

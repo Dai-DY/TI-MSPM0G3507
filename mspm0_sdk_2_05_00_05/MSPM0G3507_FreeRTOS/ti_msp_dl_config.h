@@ -74,7 +74,7 @@ extern "C" {
 
 
 
-#define CPUCLK_FREQ                                                     32000000
+#define CPUCLK_FREQ                                                     80000000
 
 
 
@@ -82,7 +82,7 @@ extern "C" {
 #define PWM_0_INST                                                         TIMA1
 #define PWM_0_INST_IRQHandler                                   TIMA1_IRQHandler
 #define PWM_0_INST_INT_IRQN                                     (TIMA1_INT_IRQn)
-#define PWM_0_INST_CLK_FREQ                                             32000000
+#define PWM_0_INST_CLK_FREQ                                             80000000
 /* GPIO defines for channel 0 */
 #define GPIO_PWM_0_C0_PORT                                                 GPIOB
 #define GPIO_PWM_0_C0_PIN                                          DL_GPIO_PIN_2
@@ -124,7 +124,7 @@ extern "C" {
 
 /* Defines for UART_DEBUG */
 #define UART_DEBUG_INST                                                    UART0
-#define UART_DEBUG_INST_FREQUENCY                                       32000000
+#define UART_DEBUG_INST_FREQUENCY                                       40000000
 #define UART_DEBUG_INST_IRQHandler                              UART0_IRQHandler
 #define UART_DEBUG_INST_INT_IRQN                                  UART0_INT_IRQn
 #define GPIO_UART_DEBUG_RX_PORT                                            GPIOA
@@ -136,8 +136,8 @@ extern "C" {
 #define GPIO_UART_DEBUG_IOMUX_RX_FUNC                  IOMUX_PINCM22_PF_UART0_RX
 #define GPIO_UART_DEBUG_IOMUX_TX_FUNC                  IOMUX_PINCM21_PF_UART0_TX
 #define UART_DEBUG_BAUD_RATE                                            (115200)
-#define UART_DEBUG_IBRD_32_MHZ_115200_BAUD                                  (17)
-#define UART_DEBUG_FBRD_32_MHZ_115200_BAUD                                  (23)
+#define UART_DEBUG_IBRD_40_MHZ_115200_BAUD                                  (21)
+#define UART_DEBUG_FBRD_40_MHZ_115200_BAUD                                  (45)
 
 
 
@@ -235,6 +235,7 @@ void SYSCFG_DL_init(void);
 void SYSCFG_DL_initPower(void);
 void SYSCFG_DL_GPIO_init(void);
 void SYSCFG_DL_SYSCTL_init(void);
+void SYSCFG_DL_SYSCTL_CLK_init(void);
 void SYSCFG_DL_PWM_0_init(void);
 void SYSCFG_DL_TIM_delay_ms_init(void);
 void SYSCFG_DL_I2C_0_init(void);
